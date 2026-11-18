@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f7fb">
+<title>My Website — Quản lý nhiệm vụ học tập</title>
+<style>
+:root{--bg:#f5f7fb;--panel:#fff;--ink:#172033;--muted:#748096;--line:#e7ebf2;--blue:#356df3;--blue2:#eaf0ff;--green:#16845b;--red:#d34d59;--shadow:0 12px 35px rgba(28,43,75,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1080px;margin:auto;padding:34px 22px 60px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:28px}.brand{display:flex;align-items:center;gap:12px}.logo{width:43px;height:43px;border-radius:13px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:800}.brand h1{font-size:21px;margin:0;letter-spacing:-.5px}.brand p{margin:2px 0 0;color:var(--muted);font-size:13px}.today{color:var(--muted);font-size:13px;text-align:right}
+.hero{display:flex;justify-content:space-between;align-items:end;gap:18px;margin:25px 0 20px}.hero h2{font-size:30px;line-height:1.15;margin:0 0 7px;letter-spacing:-1px}.hero p{margin:0;color:var(--muted)}button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:11px 16px;font-weight:650}.primary{background:var(--blue);color:#fff;box-shadow:0 5px 13px #356df32b}.primary:hover{background:#245be0}.secondary{background:#f0f3f8;color:#34415a}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.stat{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:17px 18px;box-shadow:var(--shadow)}.stat small{color:var(--muted)}.stat strong{display:block;font-size:27px;margin-top:4px;letter-spacing:-.6px}.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.8fr);gap:17px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:19px;box-shadow:var(--shadow)}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}.panel h3{margin:0;font-size:17px}.filters{display:flex;gap:7px;flex-wrap:wrap}.filter{padding:7px 10px;background:transparent;color:var(--muted);font-size:13px}.filter.active{background:var(--blue2);color:var(--blue)}.task-list{display:grid;gap:9px}.task{display:flex;align-items:flex-start;gap:11px;border:1px solid var(--line);border-radius:12px;padding:12px}.task.done{opacity:.62}.task.done .task-title{text-decoration:line-through}.check{width:19px;height:19px;margin-top:2px;accent-color:var(--blue);flex:none}.task-main{min-width:0;flex:1}.task-title{font-weight:650;overflow-wrap:anywhere}.meta{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:4px}.tag{border-radius:20px;padding:2px 8px;background:#f0f3f8;color:#566176}.tag.high{background:#fff0f0;color:var(--red)}.tag.medium{background:#fff6e7;color:#9a6817}.task-actions{display:flex;gap:4px}.mini{padding:6px 8px;background:transparent;color:var(--muted);font-size:13px}.mini:hover{background:#f3f5f9}.empty{text-align:center;color:var(--muted);padding:35px 12px}.side-block+.side-block{border-top:1px solid var(--line);margin-top:17px;padding-top:17px}.progress-line{height:9px;border-radius:20px;background:#edf0f5;overflow:hidden;margin:10px 0}.progress-line span{height:100%;display:block;background:var(--blue);border-radius:20px;width:0;transition:width .2s}.hint{color:var(--muted);font-size:13px;margin:7px 0 0}.quick{display:grid;gap:8px}.quick button{text-align:left;background:#f5f7fb;color:#34415a;font-weight:550}.quick button:hover{background:var(--blue2);color:var(--blue)}
+dialog{border:0;border-radius:17px;padding:0;width:min(470px,calc(100% - 28px));box-shadow:0 25px 80px #14213d44}dialog::backdrop{background:#10182877}.modal{padding:22px}.modal h3{margin:0 0 16px;font-size:20px}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:13px;font-weight:650;color:#4d5870}.field input,.field select,.field textarea{width:100%;border:1px solid #dce2ec;border-radius:9px;padding:10px 11px;font:inherit;color:var(--ink);background:#fff;outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #356df31b}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.footer{text-align:center;color:#9aa3b3;font-size:12px;margin-top:25px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}.hero h2{font-size:26px}.stats{gap:8px}.stat{padding:13px}.stat strong{font-size:23px}.wrap{padding:22px 14px 45px}.today{display:none}}
+@media(max-width:420px){.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:span 2}.form-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">M</div><div><h1>My Website</h1><p>Không gian học tập của bạn</p></div></div>
+    <div class="today" id="today"></div>
+  </header>
+  <section class="hero">
+    <div><h2>Quản lý nhiệm vụ học tập</h2><p>Lên kế hoạch, theo dõi bài tập và hoàn thành đúng hạn.</p></div>
+    <button class="primary" id="addBtn">＋ Thêm nhiệm vụ</button>
+  </section>
+  <section class="stats">
+    <div class="stat"><small>Tổng nhiệm vụ</small><strong id="total">0</strong></div>
+    <div class="stat"><small>Chưa hoàn thành</small><strong id="pending">0</strong></div>
+    <div class="stat"><small>Đã hoàn thành</small><strong id="completed">0</strong></div>
+  </section>
+  <main class="layout">
+    <section class="panel">
+      <div class="panel-head"><h3>Danh sách nhiệm vụ</h3><div class="filters">
+        <button class="filter active" data-filter="all">Tất cả</button>
+        <button class="filter" data-filter="pending">Cần làm</button>
+        <button class="filter" data-filter="done">Hoàn thành</button>
+      </div></div>
+      <div class="task-list" id="taskList"></div>
+    </section>
+    <aside class="panel">
+      <div class="side-block">
+        <h3>Tiến độ học tập</h3>
+        <div class="progress-line"><span id="progressBar"></span></div>
+        <strong id="progressText">0% hoàn thành</strong>
+        <p class="hint">Cứ hoàn thành từng việc nhỏ, bạn sẽ tiến gần mục tiêu hơn.</p>
+      </div>
+      <div class="side-block">
+        <h3>Thao tác nhanh</h3>
+        <div class="quick" style="margin-top:12px">
+          <button id="todayBtn">▣　Xem nhiệm vụ hôm nay</button>
+          <button id="allBtn">☷　Hiện tất cả nhiệm vụ</button>
+          <button id="exportBtn">↓　Xuất bản sao dữ liệu</button>
+          <button id="clearDoneBtn">✓　Xóa nhiệm vụ đã xong</button>
+        </div>
+        <p class="hint">Dữ liệu được lưu trên trình duyệt của thiết bị này.</p>
+      </div>
+    </aside>
+  </main>
+  <div class="footer">My Website · Công cụ quản lý nhiệm vụ học tập cá nhân</div>
+</div>
+
+<dialog id="taskDialog">
+<form class="modal" id="taskForm">
+  <h3 id="dialogTitle">Thêm nhiệm vụ mới</h3>
+  <input type="hidden" id="taskId">
+  <div class="field"><label for="title">Tên nhiệm vụ *</label><input id="title" required maxlength="100" placeholder="Ví dụ: Làm bài tập Toán trang 25"></div>
+  <div class="form-row">
+    <div class="field"><label for="subject">Môn học</label><input id="subject" maxlength="40" placeholder="Toán, Văn, Anh..."></div>
+    <div class="field"><label for="due">Hạn hoàn thành</label><input id="due" type="date"></div>
+  </div>
+  <div class="field"><label for="priority">Mức độ ưu tiên</label><select id="priority"><option value="low">Thấp</option><option value="medium" selected>Trung bình</option><option value="high">Cao</option></select></div>
+  <div class="field"><label for="note">Ghi chú</label><textarea id="note" rows="2" maxlength="300" placeholder="Nội dung cần nhớ..."></textarea></div>
+  <div class="modal-actions"><button type="button" class="secondary" id="cancelBtn">Hủy</button><button class="primary" type="submit">Lưu nhiệm vụ</button></div>
+</form>
+</dialog>
+<script>
+const KEY='myWebsiteSchoolTasks_v1';
+let tasks=loadTasks(), filter='all', todayOnly=false;
+const $=id=>document.getElementById(id);
+function loadTasks(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch{return []}}
+function save(){localStorage.setItem(KEY,JSON.stringify(tasks))}
+function dateText(s){if(!s)return 'Chưa đặt hạn';const [y,m,d]=s.split('-');return `${d}/${m}/${y}`}
+function escapeHTML(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function render(){
+  $('total').textContent=tasks.length;
+  const done=tasks.filter(t=>t.done).length, pending=tasks.length-done;
+  $('pending').textContent=pending;$('completed').textContent=done;
+  const pct=tasks.length?Math.round(done/tasks.length*100):0;
+  $('progressBar').style.width=pct+'%';$('progressText').textContent=pct+'% hoàn thành';
+  let shown=tasks.filter(t=>filter==='all'||(filter==='done'?t.done:!t.done));
+  if(todayOnly){const today=new Date().toLocaleDateString('en-CA');shown=shown.filter(t=>t.due===today)}
+  shown.sort((a,b)=>(a.done-b.done)||((a.due||'9999').localeCompare(b.due||'9999')));
+  $('taskList').innerHTML=shown.length?shown.map(t=>`
+    <article class="task ${t.done?'done':''}">
+      <input class="check" type="checkbox" ${t.done?'checked':''} aria-label="Đánh dấu hoàn thành" onchange="toggleTask('${t.id}')">
+      <div class="task-main">
+        <div class="task-title">${escapeHTML(t.title)}</div>
+        <div class="meta"><span>${escapeHTML(t.subject||'Chưa phân môn')}</span><span>•</span><span>Hạn: ${dateText(t.due)}</span><span class="tag ${t.priority}">${({low:'Thấp',medium:'Trung bình',high:'Ưu tiên cao'})[t.priority]}</span></div>
+        ${t.note?`<div class="meta">${escapeHTML(t.note)}</div>`:''}
+      </div>
+      <div class="task-actions"><button class="mini" title="Sửa" onclick="editTask('${t.id}')">Sửa</button><button class="mini" title="Xóa" onclick="deleteTask('${t.id}')">Xóa</button></div>
+    </article>`).join(''):`<div class="empty">${todayOnly?'Không có nhiệm vụ nào đến hạn hôm nay.':'Chưa có nhiệm vụ trong mục này. Hãy thêm nhiệm vụ đầu tiên nhé!'}</div>`;
+  document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b.dataset.filter===filter));
+}
+function openNew(){ $('taskForm').reset();$('taskId').value='';$('dialogTitle').textContent='Thêm nhiệm vụ mới';$('priority').value='medium';$('taskDialog').showModal();$('title').focus()}
+function toggleTask(id){const t=tasks.find(x=>x.id===id);if(t){t.done=!t.done;save();render()}}
+function editTask(id){const t=tasks.find(x=>x.id===id);if(!t)return;$('taskId').value=t.id;$('title').value=t.title;$('subject').value=t.subject||'';$('due').value=t.due||'';$('priority').value=t.priority;$('note').value=t.note||'';$('dialogTitle').textContent='Chỉnh sửa nhiệm vụ';$('taskDialog').showModal()}
+function deleteTask(id){if(confirm('Bạn có chắc muốn xóa nhiệm vụ này?')){tasks=tasks.filter(t=>t.id!==id);save();render()}}
+$('taskForm').addEventListener('submit',e=>{e.preventDefault();const id=$('taskId').value;const old=tasks.find(t=>t.id===id);const item={id:id||String(Date.now()),title:$('title').value.trim(),subject:$('subject').value.trim(),due:$('due').value,priority:$('priority').value,note:$('note').value.trim(),done:old?old.done:false};if(!item.title)return;if(old)tasks=tasks.map(t=>t.id===id?item:t);else tasks.push(item);save();$('taskDialog').close();render()});
+$('addBtn').onclick=openNew;$('cancelBtn').onclick=()=>$('taskDialog').close();
+document.querySelectorAll('.filter').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;todayOnly=false;render()});
+$('todayBtn').onclick=()=>{todayOnly=true;filter='all';render()};
+$('allBtn').onclick=()=>{todayOnly=false;filter='all';render()};
+$('clearDoneBtn').onclick=()=>{const n=tasks.filter(t=>t.done).length;if(n&&confirm(`Xóa ${n} nhiệm vụ đã hoàn thành?`)){tasks=tasks.filter(t=>!t.done);save();render()}};
+$('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(tasks,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='my-website-nhiem-vu.json';a.click();URL.revokeObjectURL(a.href)};
+$('today').textContent=new Date().toLocaleDateString('vi-VN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+render();
+</script>
+</body>
+</html>
